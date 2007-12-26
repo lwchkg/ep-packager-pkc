@@ -1,0 +1,5 @@
+<RCC>
+    <qresource prefix="/Icons" >
+        <file>images/ep-packager_16.png</file>
+    </qresource>
+</RCC>
