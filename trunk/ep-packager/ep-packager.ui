@@ -1,0 +1,489 @@
+<ui version="4.0" >
+ <class>ep_packagerClass</class>
+ <widget class="QWidget" name="ep_packagerClass" >
+  <property name="geometry" >
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>386</width>
+    <height>264</height>
+   </rect>
+  </property>
+  <property name="windowTitle" >
+   <string>E-Portfolio Packager</string>
+  </property>
+  <property name="windowIcon" >
+   <iconset resource="ep-packager.qrc" >:/Icons/images/ep-packager_16.png</iconset>
+  </property>
+  <layout class="QGridLayout" >
+   <item row="0" column="0" >
+    <widget class="QTabWidget" name="tabWidget" >
+     <property name="currentIndex" >
+      <number>0</number>
+     </property>
+     <widget class="QWidget" name="tab" >
+      <attribute name="title" >
+       <string>Process</string>
+      </attribute>
+      <layout class="QVBoxLayout" >
+       <property name="leftMargin" >
+        <number>0</number>
+       </property>
+       <property name="topMargin" >
+        <number>0</number>
+       </property>
+       <property name="rightMargin" >
+        <number>0</number>
+       </property>
+       <property name="bottomMargin" >
+        <number>0</number>
+       </property>
+       <item>
+        <layout class="QVBoxLayout" >
+         <property name="leftMargin" >
+          <number>9</number>
+         </property>
+         <property name="topMargin" >
+          <number>9</number>
+         </property>
+         <property name="rightMargin" >
+          <number>9</number>
+         </property>
+         <property name="bottomMargin" >
+          <number>0</number>
+         </property>
+         <item>
+          <layout class="QHBoxLayout" >
+           <item>
+            <widget class="QLabel" name="srcFile_label" >
+             <property name="focusPolicy" >
+              <enum>Qt::NoFocus</enum>
+             </property>
+             <property name="text" >
+              <string>Zip &amp;File:</string>
+             </property>
+             <property name="buddy" >
+              <cstring>srcFile</cstring>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="fileEdit" name="srcFile" >
+             <property name="toolTip" >
+              <string>Drop the zip file downloaded from e-portfolio website to here</string>
+             </property>
+             <property name="text" >
+              <string/>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QToolButton" name="srcFile_more" >
+             <property name="text" >
+              <string>...</string>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </item>
+         <item>
+          <layout class="QHBoxLayout" >
+           <item>
+            <widget class="QLabel" name="srcDir_label" >
+             <property name="text" >
+              <string>&amp;Directory with portfolio:</string>
+             </property>
+             <property name="buddy" >
+              <cstring>srcDir</cstring>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="dirEdit" name="srcDir" >
+             <property name="toolTip" >
+              <string>Drop the folder containing the portfolio items here</string>
+             </property>
+             <property name="text" >
+              <string/>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QToolButton" name="srcDir_more" >
+             <property name="text" >
+              <string>...</string>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </item>
+         <item>
+          <layout class="QHBoxLayout" >
+           <item>
+            <widget class="QLabel" name="itemMissing_label" >
+             <property name="text" >
+              <string>&amp;Missing Items (class nos):</string>
+             </property>
+             <property name="buddy" >
+              <cstring>itemMissing</cstring>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QLineEdit" name="itemMissing" >
+             <property name="toolTip" >
+              <string>&lt;html>&lt;head>&lt;meta name="qrichtext" content="1" />&lt;style type="text/css">
+p, li { white-space: pre-wrap; }
+&lt;/style>&lt;/head>&lt;body>&lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">Enter the class numbers of students who did not do the submission. e.g. &lt;span style=" font-weight:600;">9,13,18&lt;/span>&lt;/p>&lt;/body>&lt;/html></string>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </item>
+         <item>
+          <layout class="QHBoxLayout" >
+           <item>
+            <widget class="QLabel" name="srcType_label" >
+             <property name="text" >
+              <string>&amp;Type of data:</string>
+             </property>
+             <property name="buddy" >
+              <cstring>srcType</cstring>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QComboBox" name="srcType" >
+             <property name="sizePolicy" >
+              <sizepolicy vsizetype="Fixed" hsizetype="Expanding" >
+               <horstretch>0</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
+             <property name="toolTip" >
+              <string>If necessary, enter the type of data to upload to the system</string>
+             </property>
+             <property name="editable" >
+              <bool>true</bool>
+             </property>
+             <item>
+              <property name="text" >
+               <string>PDF (*.pdf)</string>
+              </property>
+             </item>
+             <item>
+              <property name="text" >
+               <string>Images (*.jpg; *.tif)</string>
+              </property>
+             </item>
+             <item>
+              <property name="text" >
+               <string>Flash Movies (*.flv)</string>
+              </property>
+             </item>
+             <item>
+              <property name="text" >
+               <string>Documents (*.doc; *.xls; *.ppt)</string>
+              </property>
+             </item>
+             <item>
+              <property name="text" >
+               <string>Archives (*.zip; *.7z; *.rar)</string>
+              </property>
+             </item>
+             <item>
+              <property name="text" >
+               <string>&lt;Directories></string>
+              </property>
+             </item>
+            </widget>
+           </item>
+          </layout>
+         </item>
+         <item>
+          <layout class="QHBoxLayout" >
+           <item>
+            <layout class="QVBoxLayout" >
+             <item>
+              <widget class="QCheckBox" name="pdf_single" >
+               <property name="toolTip" >
+                <string>Check this to convert JPEG and TIFF files to PDF file</string>
+               </property>
+               <property name="text" >
+                <string>Convert images to single &amp;PDF file</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QCheckBox" name="original_filename" >
+               <property name="toolTip" >
+                <string>&lt;html>&lt;head>&lt;meta name="qrichtext" content="1" />&lt;style type="text/css">
+p, li { white-space: pre-wrap; }
+&lt;/style>&lt;/head>&lt;body style=" font-family:'新細明體'; font-size:9pt; font-weight:400; font-style:normal;">
+&lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">Click this to retain the original file name of the portfolio items.&lt;/p>
+&lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">Otherwise the files will be renamed to something like &lt;span style=" font-weight:600;">2007-12-17-140533-1.jpg&lt;/span>&lt;/p>&lt;/body>&lt;/html></string>
+               </property>
+               <property name="text" >
+                <string>Retain &amp;original file name</string>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </item>
+           <item>
+            <spacer>
+             <property name="orientation" >
+              <enum>Qt::Horizontal</enum>
+             </property>
+             <property name="sizeHint" >
+              <size>
+               <width>40</width>
+               <height>20</height>
+              </size>
+             </property>
+            </spacer>
+           </item>
+           <item>
+            <widget class="QPushButton" name="cmdProcess" >
+             <property name="text" >
+              <string>Process</string>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </item>
+         <item>
+          <spacer>
+           <property name="orientation" >
+            <enum>Qt::Vertical</enum>
+           </property>
+           <property name="sizeHint" >
+            <size>
+             <width>344</width>
+             <height>0</height>
+            </size>
+           </property>
+          </spacer>
+         </item>
+        </layout>
+       </item>
+       <item>
+        <widget class="QFrame" name="frame" >
+         <property name="minimumSize" >
+          <size>
+           <width>0</width>
+           <height>0</height>
+          </size>
+         </property>
+         <property name="autoFillBackground" >
+          <bool>false</bool>
+         </property>
+         <property name="styleSheet" >
+          <string>#frame {background-color: #dddddd; border-top: 2px groove #aaaaaa} QLabel{color: gray}</string>
+         </property>
+         <property name="frameShape" >
+          <enum>QFrame::StyledPanel</enum>
+         </property>
+         <layout class="QGridLayout" >
+          <property name="topMargin" >
+           <number>2</number>
+          </property>
+          <property name="bottomMargin" >
+           <number>2</number>
+          </property>
+          <property name="verticalSpacing" >
+           <number>2</number>
+          </property>
+          <item row="0" column="0" >
+           <widget class="QLabel" name="infoStudents" >
+            <property name="styleSheet" >
+             <string/>
+            </property>
+            <property name="text" >
+             <string>Students: &lt;nil></string>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="1" >
+           <widget class="QLabel" name="infoDatacount" >
+            <property name="styleSheet" >
+             <string/>
+            </property>
+            <property name="text" >
+             <string>Files/Directories: &lt;nil></string>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="0" colspan="2" >
+           <widget class="QLabel" name="infoTitle" >
+            <property name="styleSheet" >
+             <string/>
+            </property>
+            <property name="text" >
+             <string>Title: &lt;nil></string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+     <widget class="QWidget" name="tab_3" >
+      <attribute name="title" >
+       <string>Advanced</string>
+      </attribute>
+      <layout class="QVBoxLayout" >
+       <item>
+        <layout class="QHBoxLayout" >
+         <item>
+          <widget class="QLabel" name="maxZipFileSize_label" >
+           <property name="text" >
+            <string>&amp;Max size of generated file:</string>
+           </property>
+           <property name="buddy" >
+            <cstring>maxZipFileSize</cstring>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QSpinBox" name="maxZipFileSize" >
+           <property name="sizePolicy" >
+            <sizepolicy vsizetype="Fixed" hsizetype="Expanding" >
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
+           <property name="suffix" >
+            <string> bytes</string>
+           </property>
+           <property name="minimum" >
+            <number>8388608</number>
+           </property>
+           <property name="maximum" >
+            <number>2147483647</number>
+           </property>
+           <property name="singleStep" >
+            <number>1048576</number>
+           </property>
+           <property name="value" >
+            <number>83886080</number>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+       <item>
+        <spacer>
+         <property name="orientation" >
+          <enum>Qt::Vertical</enum>
+         </property>
+         <property name="sizeHint" >
+          <size>
+           <width>20</width>
+           <height>40</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+       <item>
+        <widget class="QGroupBox" name="groupBox" >
+         <property name="title" >
+          <string>About</string>
+         </property>
+         <layout class="QVBoxLayout" >
+          <item>
+           <widget class="QLabel" name="label" >
+            <property name="text" >
+             <string>&lt;html>&lt;head>&lt;meta name="qrichtext" content="1" />&lt;style type="text/css">
+p, li { white-space: pre-wrap; }
+&lt;/style>&lt;/head>&lt;body style=" font-family:'新細明體'; font-size:9pt; font-weight:400; font-style:normal;">
+&lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">&lt;span style=" font-weight:600;">E-Portfolio Packager&lt;/span>&lt;/p>
+&lt;p style="-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-weight:600;">&lt;/p>
+&lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">Copyright (C) Contributors&lt;/p>
+&lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">URL: &lt;a href="http://ep.puikiucollege.edu.hk/">&lt;span style=" text-decoration: underline; color:#0000ff;">http://ep.puikiucollege.edu.hk&lt;/span>&lt;/a>&lt;/p>
+&lt;p style="-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">&lt;/p>
+&lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">Distributed by GPL version 2.0&lt;/p>
+&lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">Source code is available upon request&lt;/p>&lt;/body>&lt;/html></string>
+            </property>
+            <property name="openExternalLinks" >
+             <bool>true</bool>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+     <widget class="QWidget" name="tab_2" >
+      <attribute name="title" >
+       <string>Log</string>
+      </attribute>
+      <layout class="QGridLayout" >
+       <property name="leftMargin" >
+        <number>0</number>
+       </property>
+       <property name="topMargin" >
+        <number>0</number>
+       </property>
+       <property name="rightMargin" >
+        <number>0</number>
+       </property>
+       <property name="bottomMargin" >
+        <number>0</number>
+       </property>
+       <item row="0" column="0" >
+        <widget class="QTextEdit" name="debug_con" >
+         <property name="readOnly" >
+          <bool>true</bool>
+         </property>
+         <property name="html" >
+          <string>&lt;html>&lt;head>&lt;meta name="qrichtext" content="1" />&lt;style type="text/css">
+p, li { white-space: pre-wrap; }
+&lt;/style>&lt;/head>&lt;body style=" font-family:'新細明體'; font-size:9pt; font-weight:400; font-style:normal;">
+&lt;p style="-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">&lt;/p>&lt;/body>&lt;/html></string>
+         </property>
+         <property name="acceptRichText" >
+          <bool>false</bool>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <layoutdefault spacing="6" margin="11" />
+ <customwidgets>
+  <customwidget>
+   <class>dirEdit</class>
+   <extends>QLineEdit</extends>
+   <header>widgets.h</header>
+  </customwidget>
+  <customwidget>
+   <class>fileEdit</class>
+   <extends>QLineEdit</extends>
+   <header>widgets.h</header>
+  </customwidget>
+ </customwidgets>
+ <tabstops>
+  <tabstop>srcFile</tabstop>
+  <tabstop>srcFile_more</tabstop>
+  <tabstop>srcDir</tabstop>
+  <tabstop>srcDir_more</tabstop>
+  <tabstop>itemMissing</tabstop>
+  <tabstop>srcType</tabstop>
+  <tabstop>pdf_single</tabstop>
+  <tabstop>original_filename</tabstop>
+  <tabstop>cmdProcess</tabstop>
+  <tabstop>maxZipFileSize</tabstop>
+  <tabstop>tabWidget</tabstop>
+  <tabstop>debug_con</tabstop>
+ </tabstops>
+ <resources>
+  <include location="ep-packager.qrc" />
+ </resources>
+ <connections/>
+</ui>
