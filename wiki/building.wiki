@@ -1,0 +1,22 @@
+= How to build the application =
+
+== Needed program/libraries ==
+ # MinGW (Any GNU C++ should be okay, but this program is only tested under Windows XP)
+ # MSYS (to compile PDFlib Lite 7)
+ # Qt4 Open Source Edition [http://trolltech.com/downloads/opensource]
+ # QuaZIP [http://quazip.sourceforge.net/]
+ # PDFlib Lite 7 [http://www.pdflib.com/download/free-software/pdflib-lite/]
+
+== Build Procedures ==
+ # Download and install MinGW
+ # Download and compile Qt4. Commands:
+  # `configure -release -static -no-exceptions -no-qt3support -plugin-sql-sqlite -plugin-sql-odbc -qt-libpng -qt-libjpeg`
+  # `mingw32-make release`
+ # Download and compile QuaZIP. Put libquazip.a and all headers in the MinGW directory.
+ # Download and compile PDFlib Lite 7 using MSYS.
+  # The library is configured to produce static library only.
+  # Change `#undef PDC_UNICODE_FILENAME` to `#define PDC_UNICODE_FILENAME` in libs/pdcore/pc_config.h _note: we absolutely need Unicode_
+  # `make`
+  # Add bind/pdflib/cpp/pdflib.lo to lib/pdflib/.libs/pdflib.a using the libtool given by PDFlib (note: I've forgotten the exact command line)
+  # Put the final library and the C & C++ headers in MinGW directory. The library should be named libpdf.a
+ # Compile this program
