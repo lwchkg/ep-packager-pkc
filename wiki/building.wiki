@@ -1,4 +1,4 @@
-#How to build the application
+#summary How to build the application
 
 = How to build the application =
 
