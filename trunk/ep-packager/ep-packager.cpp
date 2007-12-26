@@ -33,7 +33,7 @@ bool srcDirChanged = false, srcFileChanged = false;
 
 // public function (to be moved away)
 static QStringList QDirFilters(const QString &s) {
-	QRegExp re("\\((.*)\\)"), reSplit(" *; *");
+	static QRegExp re("\\((.*)\\)"), reSplit(" *; *");
 	if (re.indexIn(s) != -1) {
 		return re.cap(1).split(reSplit);
 	} else {
@@ -76,7 +76,7 @@ void ep_packager::on_srcDir_editingFinished() {
 
 	// if no of directories >= 10, then directories should be the correct type
 	if (list.count() >= 10) {
-		ui.srcType->lineEdit()->setText("<Directories>");
+		ui.srcType->setEditText("<Directories>");
 		setInfo("datacount", list.count());
 		return;
 	}
@@ -103,7 +103,7 @@ void ep_packager::on_srcDir_editingFinished() {
 
 	// accept extension if count >= 10
 	if (maxV >= 10) {
-		ui.srcType->lineEdit()->setText("*." + maxK);
+		ui.srcType->setEditText("*." + maxK);
 		setInfo("datacount", maxV);
 	} else
 		setInfo("datacount", tr("<nil>"));
@@ -174,18 +174,39 @@ void ep_packager::on_srcFile_more_clicked() {
 
 void ep_packager::on_cmdProcess_clicked() {
 	int c, i, j, filesPerStudent, fileNo;
+	int minJpegSize = 0, minTiffSize = 0;
 	qint64 noBytes, totalBytes;
 	char buf[bufSize];
 	bool dirMode, pdfMode;
-	QString srcDir = QDir::fromNativeSeparators(ui.srcDir->text());
-	QString srcFile = QDir::fromNativeSeparators(ui.srcFile->text());
-	QString timestamp = QDateTime::currentDateTime().toString("yyyy-MM-dd-hhmmss");
+	const QString srcDir = QDir::fromNativeSeparators(ui.srcDir->text());
+	const QString srcFile = QDir::fromNativeSeparators(ui.srcFile->text());
+	const QString timestamp = QDateTime::currentDateTime().toString("yyyy-MM-dd-hhmmss");
 	QString destFile;
 	QDir dir;
 	QStringList srcDirList, fileList, missingList;
 	QMap<QString, QStringList> toAddList;
 
+	{ // bracket for scoping
+		QRegExp match("(\\d+)(?: *\\(.*\\))?");
+		bool success;
+		if (success = match.exactMatch(ui.minJpegSize->lineEdit()->text()))
+			minJpegSize = match.cap(1).toInt();
+		if (success = (success && match.exactMatch(ui.minTiffSize->lineEdit()->text())))
+			minTiffSize = match.cap(1).toInt();
+		if (!success) {
+			QMessageBox::critical(
+					this, tr("Process Failed"),
+					tr("Minimum JPEG & TIFF sizes must be numbers"));
+			return;
+		}
+	}
+
 	ui.debug_con->append("Start processing.");
+
+	if (minJpegSize)
+		ui.debug_con->append(tr("Minimum JPEG filesize: %1").arg(minJpegSize));
+	if (minTiffSize)
+		ui.debug_con->append(tr("Minimum TIFF filesize: %1").arg(minTiffSize));
 
 	QuaZip zSrc(srcFile);
 
@@ -231,8 +252,7 @@ void ep_packager::on_cmdProcess_clicked() {
 			ui.debug_con->append("Remove item: " + removeList[0]);
 		} else {
 			QMessageBox::critical(
-					this,
-					tr("Process Failed"),
+					this, tr("Process Failed"),
 					tr("Missing item \"%1\" matches %2 student.\nExactly ONE match is required.")
 					.arg(missingList[i]).arg(removeList.count()));
 			return;
@@ -298,6 +318,34 @@ void ep_packager::on_cmdProcess_clicked() {
 		QStringList processList = iter.value();
 
 		c = processList.count();
+
+		// remove files smaller than specified minimum size
+		if (minJpegSize || minTiffSize) {
+			static const QRegExp endJpeg("\\.jpe?g$", Qt::CaseInsensitive);
+			static const QRegExp endTiff("\\.tiff?$", Qt::CaseInsensitive);
+			int minSize, fSize;
+			for (i=0; i<c;) {
+				if (minJpegSize && processList[i].contains(endJpeg)) {
+					minSize = minJpegSize;
+				} else if (minTiffSize && processList[i].contains(endTiff)) {
+					minSize = minTiffSize;
+				} else {
+					minSize = 0;
+				}
+					
+				if (minSize && (fSize = QFileInfo(srcDir + "/" + (dirMode ? fileList[j] : "")
+						+ "/" + processList[i]).size()) < minSize) {
+					ui.debug_con->append(QString("Skipped: %1 (%2 bytes)")
+							.arg(processList[i]).arg(fSize));
+					processList.removeAt(i);
+					c--;
+				}
+				else {
+					i++;
+				}
+			}
+		}
+		// c was already set to processList.count();
 		for (i=0; i<c; i++) {
 			try {
 				QByteArray pdfbuf;
@@ -311,7 +359,7 @@ void ep_packager::on_cmdProcess_clicked() {
 				QStringList pdfprocessList;
 				pdfMode = false;
 				if (i == 0 && ui.pdf_single->isChecked()) {
-					pdfprocessList = processList.filter(QRegExp("\\.(jpe?g|tiff?)$",
+					pdfprocessList = processList.filter(QRegExp("\\.(?:jpe?g|tiff?)$",
 									Qt::CaseInsensitive));
 					// enable pdf mode only if there are files to convert
 					if (pdfprocessList.count() >= 1)
